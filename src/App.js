@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import {Switch, Route} from 'react-router-dom';
-import Layout from './features/Layout/Layout'
+import Layout from './common/Layout/Layout'
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Switch>
         <Route path="/" component={Layout}></Route>
       </Switch>

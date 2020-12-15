@@ -1,8 +1,8 @@
 import React , {lazy}  from 'react';
 
-const Login = lazy(() => import('../../Login/Login'));
-const Register = lazy(()=> import('../../Register/Register'));
-const Main = lazy(()=> import('../../Main/Main'));
+const Login = lazy(() => import('../../../features/Login/Login'));
+const Register = lazy(()=> import('../../../features/Register/Register'));
+const Main = lazy(()=> import('../../../features/Main/Main'));
 
 const routes = [
   { path: '/main', name: 'Main', component: Main },
