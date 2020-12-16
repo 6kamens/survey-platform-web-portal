@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import routes from "./routes";
-const loading = <h1>Loading...</h1>;
+const loading = <h1></h1>;
 
 const ContentSection = (props) => {
   return (
