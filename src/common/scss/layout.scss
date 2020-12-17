@@ -1,12 +1,16 @@
 $navbar-section-color:#fffefd;
 $bg-section-color:#fffefd;
+$bg-footer-color:#efefef;
 
 .bg-style{
     background-color: $bg-section-color;
-    padding-top: 60px;
+    padding-top: 100px;
 }
 
 .navbar-style{
     background-color: $navbar-section-color;
 }
 
+.footer-style{
+    background-color: $bg-footer-color;
+}
