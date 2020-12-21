@@ -33,12 +33,13 @@ const MainTopSection = (props) => {
         <Grid container spacing={6} justify="center">
           <Grid item>
             <Button
+              className="button is-warning"
               variant="contained"
               color="primary"
               size="large"
               startIcon={<ThumbUpIcon />}
             >
-              LIKE US ON FACEBOOK
+              เริ่มต้นใช้งานฟรี
             </Button>
           </Grid>
         </Grid>
