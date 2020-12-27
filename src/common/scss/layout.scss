@@ -1,9 +1,17 @@
 $navbar-section-color:#fffefd;
 $bg-section-color:#fffefd;
 $bg-footer-color:#efefef;
+$bg-container-color:#fffefc;
 
 .bg-style{
-    background-color: $bg-section-color;
-    padding-top: 50px;
+    background-color: $bg-container-color;
     height: auto;
+}
+
+body{
+    font-family: "Kanit";
+}
+
+.kanit-font{
+    font-family: "Kanit";
 }

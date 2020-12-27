@@ -1,6 +1,5 @@
 import '../scss/layout.scss';
 import NavBar from "./NavBar/NavBar";
-import NavBarTop from "./NavBar/NavBarTop";
 import ContentSection from "./Content/Content";
 import FooterSection from "./Footer/Footer";
 
@@ -8,8 +7,8 @@ import FooterSection from "./Footer/Footer";
 const LayoutPage = (props) => {
   return (
     <div>
-        <NavBarTop></NavBarTop>
         <NavBar></NavBar>
+        <br></br>
         <ContentSection ></ContentSection>
         <FooterSection></FooterSection>
     </div>

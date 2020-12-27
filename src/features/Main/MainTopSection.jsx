@@ -19,16 +19,22 @@ const MainTopSection = (props) => {
           </Grid>
         </Grid>
         <Typography
-          variant="h2"
+          variant="h4"
           align="center"
-          color="textPrimary"
           gutterBottom
           marginTop={5}
+          style={{ fontFamily: "Kanit", fontWeight: "bold" }}
         >
-          <b>All-in-one workspace</b>
+          ระบบคำถาม-คำตอบที่ดีที่สุดที่คุณกำหนดได้
         </Typography>
-        <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          One tool for your whole team. Write, plan, and get organized.
+        <Typography
+          variant="h5"
+          align="center"
+          color="textSecondary"
+          paragraph
+          style={{ fontFamily: "Kanit", fontWeight: "200" }}
+        >
+          ทดลองใช้งานได้เเล้ววันนี้
         </Typography>
         <Grid container spacing={6} justify="center">
           <Grid item>
@@ -37,7 +43,7 @@ const MainTopSection = (props) => {
               variant="contained"
               color="primary"
               size="large"
-              startIcon={<ThumbUpIcon />}
+              style={{ fontFamily: "Kanit", fontWeight: "bold" }}
             >
               เริ่มต้นใช้งานฟรี
             </Button>

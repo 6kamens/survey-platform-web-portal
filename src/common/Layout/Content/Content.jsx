@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import routes from "./routes";
+import routes from "../routes";
 const loading = <h1></h1>;
 
 const ContentSection = (props) => {
@@ -21,7 +21,7 @@ const ContentSection = (props) => {
                 )
               );
             })}
-            <Redirect from="/" to="/main" />
+            <Redirect from="/" to="/notfound"  />
           </Switch>
         </Suspense>
       </div>

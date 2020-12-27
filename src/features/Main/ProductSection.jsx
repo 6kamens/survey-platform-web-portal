@@ -1,91 +1,57 @@
-import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
-import CameraIcon from "@material-ui/icons/PhotoCamera";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
+import mainImage from "../../common/img/main.png";
+import styled from "styled-components";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
-  card: {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-  },
-  cardMedia: {
-    paddingTop: "30%", // 16:9
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
-  },
-}));
-
-const cards = [1, 2, 3,4];
+const Image = styled.img`
+  width: 50%;
+  height: 50%;
+`;
 
 const ProductSection = (props) => {
-  const classes = useStyles();
+  const products = [
+    {
+      name: "สอบถามความพึงพอใจ",
+      title: "สอบถามความพึงพอใจ",
+      content: "สำรวจความพึงพอใจที่ลูกค้ามีต่อสินค้าของท่าน",
+      img:
+        "https://prod-notion-assets.s3-us-west-2.amazonaws.com/front/shared/illustrations/use-case-objects/engineering.png",
+    },
+    {
+      name: "สอบถามข้อมูล",
+      title: "สอบถามข้อมูล",
+      content: "เก็บข้อมูล",
+      img:
+        "https://prod-notion-assets.s3-us-west-2.amazonaws.com/front/shared/illustrations/use-case-objects/product.png",
+    },
+    {
+      name: "สอบถามความพึงพอใจ",
+      title: "สอบถามความพึงพอใจ",
+      content: "สำรวจความพึงพอใจที่ลูกค้ามีต่อสินค้าของท่าน",
+      img:
+        "https://prod-notion-assets.s3-us-west-2.amazonaws.com/front/shared/illustrations/use-case-objects/design.png",
+    },
+    
+  ];
 
   return (
-    <Container maxWidth="md"  style={{ marginTop: "30px", marginBottom: "50px" }}>
-      {/* End hero unit */}
-      <Grid container spacing={4}>
-        {cards.map((card) => (
-          <Grid item key={card} xs={12} sm={6} md={3}>
-            <Card className={classes.card}>
-              <CardMedia
-                className={classes.cardMedia}
-                image="https://source.unsplash.com/random"
-                title="Image title"
-              />
-              <CardContent style={{textAlign:"center"}}>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Heading
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+    <section className="pt-6 has-text-centered">
+      <h1 className="title is-4">บริการของเรา</h1>
+      <h4 className="subtitle is-8">สร้างเเบบสำรวจได้หลากหลายตามที่คุณต้องการ</h4>
+      <div className="columns is-centered is-mobile-only ">
+        {products.map((product) => (
+          <div className="column has-text-centered m-0 p-0">
+            <div>
+              <div>
+                <Image src={product.img}></Image>
+              </div>
+              <div className="card-content">
+                <h1 className="title is-size-5">{product.title}</h1>
+                <p className="is-size-6 subtitle">{product.content}</p>
+              </div>
+            </div>
+          </div>
         ))}
-      </Grid>
-    </Container>
+      </div>
+    </section>
   );
 };
 

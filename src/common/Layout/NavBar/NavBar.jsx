@@ -10,16 +10,17 @@ const NavBarTop = (props) => {
   const navBarMenu = [
     {
       pageName: "หน้าหลัก",
-      toPage: "/main",
-    },
-    {
-      pageName: "สินค้า/บริการ",
-      toPage: "/product",
-    },
-    {
-      pageName: "ค่าบริการ",
-      toPage: "/pricing",
-    },
+      toPage: "/",
+    }
+    // ,
+    // {
+    //   pageName: "สินค้า/บริการ",
+    //   toPage: "/product",
+    // },
+    // {
+    //   pageName: "ค่าบริการ",
+    //   toPage: "/pricing",
+    // },
   ];
 
    const Nav = styled.nav`
@@ -63,7 +64,7 @@ const NavBarTop = (props) => {
               <div className="buttons  is-centered">
                 <button className="button is-warning" onClick={() => setNavbar(!navbar)}>
                   <strong>
-                    <Link to="/login" className="has-text-black is-block">เข้าสู่ระบบ</Link>
+                    <Link to="/login" className="has-text-black is-block kanit-font">เข้าสู่ระบบ</Link>
                   </strong>
                 </button>
               </div>
@@ -72,7 +73,7 @@ const NavBarTop = (props) => {
               <div className="buttons  is-centered" onClick={() => setNavbar(!navbar)}> 
                 <button className="button">
                   <strong>
-                    <Link to="/register" className="has-text-black is-block">สมัครใช้งาน</Link>
+                    <Link to="/register" className="has-text-black is-block kanit-font">สมัครใช้งาน</Link>
                   </strong>
                 </button>
               </div>
