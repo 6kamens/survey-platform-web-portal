@@ -5,19 +5,19 @@ import ProductSection from "./ProductSection";
 import CompanyInfo from "../Main/ComponyInfoSection";
 import GetStart from "../Main/GetStart";
 import MainTop from "../Main/MainTop";
+import ExampleVideo from './ExampleVideo';
 
 const Main = (props) => {
   return (
-    <div className="hero ">
-      <div className="hero-body ">
-        <div className="container ">
+    <div className="hero">
+      {/* <div className="hero-body ">
+        <div className="container "> */}
           <MainTop></MainTop>
-          {/* <MainTopSection></MainTopSection> */}
-        <WhyUsSection></WhyUsSection>
+        <ExampleVideo></ExampleVideo>
         <ProductSection></ProductSection>
         {/* <CompanyInfo></CompanyInfo> */}
-        </div>
-      </div>
+        {/* </div>
+      </div> */}
       <GetStart></GetStart>
     </div>
   );
