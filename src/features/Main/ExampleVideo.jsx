@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import styled from "styled-components";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
@@ -45,7 +45,22 @@ const TabPanel = (props) => {
 };
 
 const ExampleVideo = (props) => {
+
   const [value, setValue] = useState(0);
+
+
+  useEffect(()=>{
+   let v = setInterval(()=>{
+      if(value == 2){
+        setValue(0);
+      }else{
+        setValue(value+1);
+      }
+    },5000);
+
+    return () => clearInterval(v);
+
+  },[value]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

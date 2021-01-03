@@ -2,6 +2,7 @@ import React from "react";
 import mainImage from "../../common/img/main.png";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Typing from "react-typing-animation";
 
 const MainTop = (props) => {
   return (
@@ -14,10 +15,15 @@ const MainTop = (props) => {
         </div>
         <div class="columns is-centered">
           <div class="column  has-text-centered-desktop has-text-centered-tablet has-text-left-mobile">
-            <h1 className="title is-3">
-              สร้างเเบบสำรวจของคุณง่ายๆเเค่ปลายนิ้ว
-            </h1>
-            <h4 className="subtitle is-4">เเบบสำรวจของคุณจะไม่จำเจอีกต่อไป</h4>
+            <Typing speed={25}>
+              <span>
+                <h1 className="title is-3">
+                  สร้างเเบบสำรวจของคุณง่ายๆเเค่ปลายนิ้ว
+                </h1>
+              </span>
+            </Typing>
+
+            <h4 className="subtitle is-4 mt-2">เเบบสำรวจของคุณจะไม่จำเจอีกต่อไป</h4>
             <div className="buttons  is-centered">
               <button className="button is-medium is-hidden-mobile is-warning">
                 <strong>
