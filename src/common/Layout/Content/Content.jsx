@@ -5,8 +5,8 @@ const loading = <h1></h1>;
 
 const ContentSection = (props) => {
   return (
-      <div className="bg-style" >
-        <Suspense fallback={loading}>
+    <div className="hero bg-style is-fullheight">
+      <Suspense fallback={loading}>
           <Switch>
             {routes.map((route, idx) => {
               return (
@@ -21,10 +21,11 @@ const ContentSection = (props) => {
                 )
               );
             })}
-            <Redirect from="/" to="/notfound"  />
+            <Redirect from="/" to="/notfound" />
           </Switch>
-        </Suspense>
-      </div>
+      </Suspense>
+
+    </div>
   );
 };
 

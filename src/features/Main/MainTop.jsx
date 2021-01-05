@@ -15,7 +15,7 @@ const MainTop = (props) => {
         </div>
         <div class="columns is-centered">
           <div class="column  has-text-centered-desktop has-text-centered-tablet has-text-left-mobile">
-            <Typing speed={25}>
+            <Typing speed={15}>
               <span>
                 <h1 className="title is-3">
                   สร้างเเบบสำรวจของคุณง่ายๆเเค่ปลายนิ้ว
@@ -28,7 +28,7 @@ const MainTop = (props) => {
               <button className="button is-medium is-hidden-mobile is-warning">
                 <strong>
                   <Link
-                    to="/register"
+                    to="/login"
                     className="has-text-black is-block kanit-font"
                   >
                     เริ่มต้นใช้งาน
@@ -38,7 +38,7 @@ const MainTop = (props) => {
               <button className="button is-hidden-tablet is-warning">
                 <strong>
                   <Link
-                    to="/register"
+                    to="/login"
                     className="has-text-black is-block kanit-font"
                   >
                     เริ่มต้นใช้งาน

@@ -1,58 +1,79 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
+import React , {useState} from "react";
 import styled from "styled-components";
 import {
   FacebookLoginButton,
   GoogleLoginButton,
 } from "react-social-login-buttons";
-import mainImage from "../../common/img/main.png";
-
-const ImageLogin = styled.img`
-    width:100%;
-    height:60px
-`;
-
+import { Link } from "react-router-dom";
+import SocialAuthBtn from "./SocialAuthBtn";
+import Input from "./Input";
 const SocialBtnSpan = styled.span`
-    font-size:1rem;
+  font-size: 1rem;
 `;
 
 const Login = (props) => {
+  const [loginData,setLoginData] = useState({
+    username:{
+      value:'',
+      validator:{
+        minLength:5,
+        maxLength:5,
+        required:true
+      },
+      error:{
+        status:false,
+        message:''
+      }
+    },
+    password:{
+      value:'',
+      validator:{
+        minLength:5,
+        maxLength:5,
+        required:true
+      },
+      error:{
+        status:false,
+        message: ''
+      }
+    }
+  }); 
+
+ 
+
   return (
-    <section className="hero is-fullheight">
-      <div className="hero-body">
-        <section className="container hero">
+    <section>
+      <div className="hero-head mt-5">
+        <br></br>
+        <div className="container hero">
           <div className="columns is-centered">
-            <div className="column  is-5  has-text-centered">
+            <div className="column  is-5  ">
               <div className="card">
-                <div className="card-image mt-5">
-                  <ImageLogin src={'https://as2.ftcdn.net/jpg/02/78/89/71/500_F_278897153_hqlLBqyGGpVWZlm2aNPSeTqpio1TuteS.jpg'}></ImageLogin>
-                </div>
                 <div className="card-content">
                   <div class="content">
-                    <h1 className="title is-4">เข้าสู่ระบบ</h1>
+                    <h1 className="title is-4 has-text-centered">
+                      เข้าสู่ระบบ
+                    </h1>
                     <hr className="login-hr"></hr>
                     <form>
                       <div className="field">
-                        <div className="control">
-                          <input
-                            className="input  is-rounded kanit-font"
-                            type="email"
-                            placeholder="อีเมล"
-                          />
-                        </div>
+                        <Input
+                          label={"อีเมล"}
+                          type={"text"}
+                          name={"username"}
+                          dataForm={loginData}
+                          setDataForm={setLoginData}
+                          errorStatus={loginData.username.error.status}
+                          errorMessage={loginData.username.error.message}
+                        ></Input>
                       </div>
                       <div className="field">
-                        <div className="control">
-                          <input
-                            className="input  is-rounded kanit-font"
-                            type="password"
-                            placeholder="รหัสผ่าน"
-                          />
-                        </div>
+                        <Input
+                          label={"รหัสผ่าน"}
+                          type={"password"}
+                          require={true}
+                          length={6}
+                        ></Input>
                       </div>
                       <div className="mt-5">
                         <button
@@ -63,35 +84,27 @@ const Login = (props) => {
                         </button>
                       </div>
                       <hr className="login-hr"></hr>
-                      <div>
-                        <FacebookLoginButton
-                          align={"center"}
-                          onClick={() => alert("Hello")}
-                          size={40}
-                        >
-                          <SocialBtnSpan className="kanit-font" >
-                            เข้าสู่ระบบผ่าน Facebook
-                          </SocialBtnSpan>
-                        </FacebookLoginButton>
-                      </div>
+                      <SocialAuthBtn
+                        channel={"facebook"}
+                        label={"เข้าสู่ระบบผ่าน Facebook"}
+                      ></SocialAuthBtn>
                       <div className="mt-5 ">
-                        <GoogleLoginButton
-                          align={"center"}
-                          onClick={() => alert("Hello")}
-                          size={40}
-                        >
-                          <SocialBtnSpan className="kanit-font">
-                            เข้าสู่ระบบผ่าน Google
-                          </SocialBtnSpan>
-                        </GoogleLoginButton>
+                        <SocialAuthBtn
+                          channel={"google"}
+                          label={"เข้าสู่ระบบผ่าน Google"}
+                        ></SocialAuthBtn>
                       </div>
                     </form>
                   </div>
+                  <h5 class="subtitle is-6 has-text-centered">
+                    ยังไม่ได้เป็นสมาชิก ?{" "}
+                    <Link to="/register">คลิกเพื่อสมัคร</Link>
+                  </h5>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
     </section>
   );

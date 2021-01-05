@@ -1,7 +1,7 @@
 import React , {lazy}  from 'react';
 
 const Login = lazy(() => import('../../features/Login/Login'));
-const Register = lazy(()=> import('../../features/Register/Register'));
+const Register = lazy(()=> import('../../features/Login/Register'));
 const Main = lazy(()=> import('../../features/Main/Main'));
 const Pricing = lazy(()=> import('../../features/Pricing/Pricing'));
 const Product = lazy(()=> import('../../features/Product/Product'));

@@ -1,24 +1,16 @@
 import React from "react";
-import MainTopSection from "./MainTopSection";
-import WhyUsSection from "./WhyUsSection";
 import ProductSection from "./ProductSection";
-import CompanyInfo from "../Main/ComponyInfoSection";
-import GetStart from "../Main/GetStart";
+import ContactUs from "../Main/ContactUs";
 import MainTop from "../Main/MainTop";
 import ExampleVideo from './ExampleVideo';
 
 const Main = (props) => {
   return (
-    <div className="hero">
-      {/* <div className="hero-body ">
-        <div className="container "> */}
-          <MainTop></MainTop>
+    <div>
+        <MainTop></MainTop>
         <ExampleVideo></ExampleVideo>
         <ProductSection></ProductSection>
-        {/* <CompanyInfo></CompanyInfo> */}
-        {/* </div>
-      </div> */}
-      <GetStart></GetStart>
+        <ContactUs></ContactUs>
     </div>
   );
 };

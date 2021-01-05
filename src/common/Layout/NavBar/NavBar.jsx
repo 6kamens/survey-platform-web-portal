@@ -4,14 +4,13 @@ import logo from "../../img/sm-logo-text-green.png";
 import styled from "styled-components";
 
 const NavBarTop = (props) => {
-  
   const [navbar, setNavbar] = useState(false);
 
   const navBarMenu = [
     {
       pageName: "หน้าหลัก",
       toPage: "/",
-    }
+    },
     // ,
     // {
     //   pageName: "สินค้า/บริการ",
@@ -23,18 +22,17 @@ const NavBarTop = (props) => {
     // },
   ];
 
-   const Nav = styled.nav`
+  const Nav = styled.nav`
     background-color: #fffefd;
-   `;
+  `;
 
   return (
-  
     <Nav className="bd-navbar navbar has-shadow is-fixed-top ">
       <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item">
+          <Link to="/" className="navbar-item">
             <img src={logo}></img>
-          </a>
+          </Link>
           <a
             className={navbar ? "navbar-burger is-active" : "navbar-burger"}
             onClick={() => setNavbar(!navbar)}
@@ -62,18 +60,17 @@ const NavBarTop = (props) => {
           <div className="navbar-end ">
             <div className="navbar-item">
               <div className="buttons  is-centered">
-                <button className="button is-warning" onClick={() => setNavbar(!navbar)}>
+                <button
+                  className="button is-warning"
+                  onClick={() => setNavbar(!navbar)}
+                >
                   <strong>
-                    <Link to="/login" className="has-text-black is-block kanit-font">เข้าสู่ระบบ</Link>
-                  </strong>
-                </button>
-              </div>
-            </div>
-            <div className="navbar-item">
-              <div className="buttons  is-centered" onClick={() => setNavbar(!navbar)}> 
-                <button className="button">
-                  <strong>
-                    <Link to="/register" className="has-text-black is-block kanit-font">สมัครใช้งาน</Link>
+                    <Link
+                      to="/login"
+                      className="has-text-black is-block kanit-font"
+                    >
+                      เข้าสู่ระบบ
+                    </Link>
                   </strong>
                 </button>
               </div>
