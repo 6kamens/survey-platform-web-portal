@@ -6,7 +6,7 @@ import {
 } from "react-social-login-buttons";
 import { Link } from "react-router-dom";
 import SocialAuthBtn from "./SocialAuthBtn";
-import Input from "./Input";
+import Input from "../../common/components/Input";
 const SocialBtnSpan = styled.span`
   font-size: 1rem;
 `;
@@ -16,9 +16,10 @@ const Login = (props) => {
     username:{
       value:'',
       validator:{
-        minLength:5,
-        maxLength:5,
-        required:true
+        minLength:0,
+        maxLength:100,
+        required:true,
+        // isEmail:true
       },
       error:{
         status:false,
@@ -28,8 +29,8 @@ const Login = (props) => {
     password:{
       value:'',
       validator:{
-        minLength:5,
-        maxLength:5,
+        minLength:0,
+        maxLength:100,
         required:true
       },
       error:{
@@ -39,7 +40,6 @@ const Login = (props) => {
     }
   }); 
 
- 
 
   return (
     <section>
@@ -71,8 +71,11 @@ const Login = (props) => {
                         <Input
                           label={"รหัสผ่าน"}
                           type={"password"}
-                          require={true}
-                          length={6}
+                          name={"password"}
+                          dataForm={loginData}
+                          setDataForm={setLoginData}
+                          errorStatus={loginData.password.error.status}
+                          errorMessage={loginData.password.error.message}
                         ></Input>
                       </div>
                       <div className="mt-5">

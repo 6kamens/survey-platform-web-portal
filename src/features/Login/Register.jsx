@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState} from "react";
 import styled from "styled-components";
 import {
   FacebookLoginButton,
@@ -6,13 +6,66 @@ import {
 } from "react-social-login-buttons";
 import { Link } from "react-router-dom";
 import SocialAuthBtn from "./SocialAuthBtn";
-import Input from "./Input";
+import Input from "../../common/components/Input";
 
 const SocialBtnSpan = styled.span`
   font-size: 1rem;
 `;
 
 const Register = (props) => {
+
+  const [loginData,setLoginData] = useState({
+    username:{
+      value:'',
+      validator:{
+        minLength:0,
+        maxLength:100,
+        required:true,
+        // isEmail:true
+      },
+      error:{
+        status:false,
+        message:''
+      }
+    },
+    password:{
+      value:'',
+      validator:{
+        minLength:6,
+        maxLength:100,
+        required:true
+      },
+      error:{
+        status:false,
+        message: ''
+      }
+    },
+    firstName:{
+      value:'',
+      validator:{
+        minLength:0,
+        maxLength:100,
+        required:true
+      },
+      error:{
+        status:false,
+        message: ''
+      }
+    },
+    lastName:{
+      value:'',
+      validator:{
+        minLength:0,
+        maxLength:100,
+        required:true
+      },
+      error:{
+        status:false,
+        message: ''
+      }
+    }
+  }); 
+
   return (
     <section>
       <div className="hero-head mt-5">
@@ -34,34 +87,46 @@ const Register = (props) => {
                             <Input
                               label={"ชื่อ"}
                               type={"text"}
-                              require={true}
-                              length={0}
+                              name={"firstName"}
+                              dataForm={loginData}
+                              setDataForm={setLoginData}
+                              errorStatus={loginData.firstName.error.status}
+                              errorMessage={loginData.firstName.error.message}
                             ></Input>
                           </div>
                           <div className="field">
                             <Input
                               label={"นามสกุล"}
                               type={"text"}
-                              require={true}
-                              length={0}
+                              name={"lastName"}
+                              dataForm={loginData}
+                              setDataForm={setLoginData}
+                              errorStatus={loginData.lastName.error.status}
+                              errorMessage={loginData.lastName.error.message}
                             ></Input>
                           </div>
                         </div>
                       </div>
                       <div className="field ">
-                        <Input
+                      <Input
                           label={"อีเมล"}
                           type={"text"}
-                          require={true}
-                          length={0}
+                          name={"username"}
+                          dataForm={loginData}
+                          setDataForm={setLoginData}
+                          errorStatus={loginData.username.error.status}
+                          errorMessage={loginData.username.error.message}
                         ></Input>
                       </div>
                       <div className="field ">
-                        <Input
+                      <Input
                           label={"รหัสผ่าน"}
                           type={"password"}
-                          require={true}
-                          length={6}
+                          name={"password"}
+                          dataForm={loginData}
+                          setDataForm={setLoginData}
+                          errorStatus={loginData.password.error.status}
+                          errorMessage={loginData.password.error.message}
                         ></Input>
                       </div>
                       <div className="mt-5">
