@@ -1,45 +1,37 @@
-import React , {useState} from "react";
+import React , {useState , useEffect} from "react";
 import styled from "styled-components";
-import {
-  FacebookLoginButton,
-  GoogleLoginButton,
-} from "react-social-login-buttons";
 import { Link } from "react-router-dom";
 import SocialAuthBtn from "./SocialAuthBtn";
 import Input from "../../common/components/Input";
+import {loginRule,validateForm} from './loginFormData';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
 const SocialBtnSpan = styled.span`
   font-size: 1rem;
 `;
 
 const Login = (props) => {
-  const [loginData,setLoginData] = useState({
-    username:{
-      value:'',
-      validator:{
-        minLength:0,
-        maxLength:100,
-        required:true,
-        // isEmail:true
-      },
-      error:{
-        status:false,
-        message:''
-      }
-    },
-    password:{
-      value:'',
-      validator:{
-        minLength:0,
-        maxLength:100,
-        required:true
-      },
-      error:{
-        status:false,
-        message: ''
-      }
-    }
-  }); 
 
+  const [loading,setLoading] = useState(false);
+  const [loginData,setLoginData] = useState(loginRule); 
+
+  
+  const submitLogin =(event)=>{
+    
+    event.preventDefault();
+
+    
+    if(!validateForm([loginData.username,loginData.password],loginData,setLoginData)) return;
+    setLoading(true);
+
+    //Faking API call here
+    setTimeout(() => {
+
+      setLoading(false);
+    }, 500);
+
+  }
 
   return (
     <section>
@@ -79,12 +71,24 @@ const Login = (props) => {
                         ></Input>
                       </div>
                       <div className="mt-5">
-                        <button
+                      {!loading  && (<button
                           className="button is-block is-fullwidth is-warning is-rounded kanit-font"
                           type="submit"
+                          onClick={submitLogin}
                         >
-                          เข้าสู่ระบบ
-                        </button>
+                          เข้าสู่ระบบ  
+
+                        </button>)}
+
+                        {loading && (<button
+                          className="button is-block is-fullwidth is-warning is-rounded kanit-font"
+                          type="submit"
+                          disabled
+                          style={{opacity:"0.8"}}
+                        >
+                         <FontAwesomeIcon icon={faSpinner}  className="pr-2" size="lg"   />
+                          กำลังเข้าสู่ระบบ...
+                        </button>)}
                       </div>
                       <hr className="login-hr"></hr>
                       <SocialAuthBtn

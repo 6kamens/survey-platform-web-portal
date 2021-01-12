@@ -21,38 +21,6 @@ const Input = (props) => {
     });
   };
 
-  const checkValidate = (inputField, rules) => {
-    let isValid = true;
-    let inputFieldTrim = inputField.trim();
-    let errorMessage = "";
-
-    if (rules.required && inputFieldTrim.length == 0) {
-      isValid = false;
-      errorMessage = "กรุณากรอกข้อมูล";
-    } else if (rules.minLength && inputFieldTrim.length < rules.minLength) {
-      isValid = false;
-      errorMessage = `กรุณากรอกอย่างน้อย ${rules.minLength} ตัวอักษร`;
-    } else if (rules.maxLength && inputFieldTrim.length > rules.maxLength) {
-      isValid = false;
-      errorMessage = `กรุณากรอกไม่เกิน ${rules.maxLength} ตัวอักษร`;
-    } else if(rules.isEmail && !checkIsEmail(inputField)){
-        isValid = false;
-        errorMessage = `กรุณากรอกอีเมลที่ถูกต้อง`;
-    }
-
-    return { isValid, errorMessage };
-  };
-
-  const checkIsEmail= (email)=>{
-    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if ( re.test(email) ) {
-      return true;
-    }
-    else {  
-      return false;
-    }
-  }
-
   return (
     <div className="control">
       <p className="subtitle is-6 mb-1 ml-4">{props.label}</p>
@@ -70,4 +38,38 @@ const Input = (props) => {
   );
 };
 
+const checkIsEmail= (email)=>{
+  let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if ( re.test(email) ) {
+    return true;
+  }
+  else {  
+    return false;
+  }
+}
+
+const checkValidate = (inputField, rules) => {
+  let isValid = true;
+  let inputFieldTrim = inputField.trim();
+  let errorMessage = "";
+
+  if (rules.required && inputFieldTrim.length == 0) {
+    isValid = false;
+    errorMessage = "กรุณากรอกข้อมูล";
+  } else if (rules.minLength && inputFieldTrim.length < rules.minLength) {
+    isValid = false;
+    errorMessage = `กรุณากรอกอย่างน้อย ${rules.minLength} ตัวอักษร`;
+  } else if (rules.maxLength && inputFieldTrim.length > rules.maxLength) {
+    isValid = false;
+    errorMessage = `กรุณากรอกไม่เกิน ${rules.maxLength} ตัวอักษร`;
+  } else if(rules.isEmail && !checkIsEmail(inputField)){
+      isValid = false;
+      errorMessage = `กรุณากรอกอีเมลที่ถูกต้อง`;
+  }
+
+  return { isValid, errorMessage };
+};
+
+
+export {checkIsEmail , checkValidate};
 export default Input;

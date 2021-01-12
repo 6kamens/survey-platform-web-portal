@@ -1,12 +1,13 @@
 import React , {useState} from "react";
 import styled from "styled-components";
-import {
-  FacebookLoginButton,
-  GoogleLoginButton,
-} from "react-social-login-buttons";
 import { Link } from "react-router-dom";
+import {registerRule,validateForm} from './loginFormData';
 import SocialAuthBtn from "./SocialAuthBtn";
-import Input from "../../common/components/Input";
+import Input , {checkIsEmail} from "../../common/components/Input";
+import Alert from '../../common/components/AppAlert'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router-dom";
 
 const SocialBtnSpan = styled.span`
   font-size: 1rem;
@@ -14,57 +15,34 @@ const SocialBtnSpan = styled.span`
 
 const Register = (props) => {
 
-  const [loginData,setLoginData] = useState({
-    username:{
-      value:'',
-      validator:{
-        minLength:0,
-        maxLength:100,
-        required:true,
-        // isEmail:true
-      },
-      error:{
-        status:false,
-        message:''
-      }
-    },
-    password:{
-      value:'',
-      validator:{
-        minLength:6,
-        maxLength:100,
-        required:true
-      },
-      error:{
-        status:false,
-        message: ''
-      }
-    },
-    firstName:{
-      value:'',
-      validator:{
-        minLength:0,
-        maxLength:100,
-        required:true
-      },
-      error:{
-        status:false,
-        message: ''
-      }
-    },
-    lastName:{
-      value:'',
-      validator:{
-        minLength:0,
-        maxLength:100,
-        required:true
-      },
-      error:{
-        status:false,
-        message: ''
-      }
-    }
-  }); 
+  const [loading,setLoading] = useState(false);
+  const [loginData,setLoginData] = useState(registerRule); 
+  const [regisResult,setRegisResult] = useState(false);
+  const history = useHistory();
+
+  const submitRegister =(event)=>{
+    
+    event.preventDefault();
+    setRegisResult(false);
+
+    
+    if(!validateForm([loginData.username,loginData.password,loginData.firstName,loginData.lastName],loginData,setLoginData)) return ;
+    
+    setLoading(true);
+    
+    //Faking API call here
+    setTimeout(() => {
+
+      setLoading(false);
+      setRegisResult(true);
+    
+    }, 500);
+
+    setTimeout(() => {
+      history.push('/login');
+    }, 1000);
+
+  }
 
   return (
     <section>
@@ -130,12 +108,25 @@ const Register = (props) => {
                         ></Input>
                       </div>
                       <div className="mt-5">
-                        <button
+                        {!loading  && (<button
                           className="button is-block is-fullwidth is-warning is-rounded kanit-font"
                           type="submit"
+                          onClick={submitRegister}
                         >
-                          สมัครสมาชิก
-                        </button>
+                          สมัครสมาชิก  
+
+                        </button>)}
+
+                        {loading && (<button
+                          className="button is-block is-fullwidth is-warning is-rounded kanit-font"
+                          type="submit"
+                          disabled
+                          style={{opacity:"0.8"}}
+                        >
+                         <FontAwesomeIcon icon={faSpinner}  className="pr-2" size="lg"   />
+                          กำลังสมัคร...
+                        </button>)}
+                        
                       </div>
                       <hr className="login-hr"></hr>
                       <SocialAuthBtn
@@ -159,6 +150,7 @@ const Register = (props) => {
           </div>
         </div>
       </div>
+       {regisResult && (< Alert type='error' message='เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้งค่ะ' ></Alert>)}  
     </section>
   );
 };

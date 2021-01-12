@@ -27,22 +27,22 @@ const MainTop = (props) => {
             <div className="buttons  is-centered">
               <button className="button is-medium is-hidden-mobile is-warning">
                 <strong>
-                  <Link
-                    to="/login"
+                  <a
+                    href="/login"
                     className="has-text-black is-block kanit-font"
                   >
                     เริ่มต้นใช้งาน
-                  </Link>
+                  </a>
                 </strong>
               </button>
               <button className="button is-hidden-tablet is-warning">
                 <strong>
-                  <Link
-                    to="/login"
+                  <a
+                    href="/login"
                     className="has-text-black is-block kanit-font"
                   >
                     เริ่มต้นใช้งาน
-                  </Link>
+                  </a>
                 </strong>
               </button>
             </div>
