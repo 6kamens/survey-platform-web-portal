@@ -1,48 +1,64 @@
-import React , {useState} from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {registerRule,validateForm} from './loginFormData';
+import { registerInitial, validateForm } from "./data";
 import SocialAuthBtn from "./SocialAuthBtn";
-import Input , {checkIsEmail} from "../../common/components/Input";
-import Alert from '../../common/components/AppAlert'
+import Input, { checkIsEmail } from "../../common/components/Input";
+import Alert from "../../common/components/AppAlert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
-
-const SocialBtnSpan = styled.span`
-  font-size: 1rem;
-`;
+import { authRegister } from "./service";
 
 const Register = (props) => {
+  const [loading, setLoading] = useState(false);
+  const [registerData, setRegisterData] = useState(registerInitial);
+  const [regisResult, setRegisResult] = useState({
+    result: false,
+    openAlert: false,
+  });
 
-  const [loading,setLoading] = useState(false);
-  const [loginData,setLoginData] = useState(registerRule); 
-  const [regisResult,setRegisResult] = useState(false);
   const history = useHistory();
 
-  const submitRegister =(event)=>{
-    
+  const submitRegister = async (event) => {
     event.preventDefault();
     setRegisResult(false);
 
-    
-    if(!validateForm([loginData.username,loginData.password,loginData.firstName,loginData.lastName],loginData,setLoginData)) return ;
-    
+    if (
+      !validateForm(
+        [
+          registerData.username,
+          registerData.password,
+          registerData.firstName,
+          registerData.lastName,
+        ],
+        registerData,
+        setRegisterData
+      )
+    )
+      return;
+
     setLoading(true);
-    
-    //Faking API call here
-    setTimeout(() => {
 
+    //call register api
+    const api = await authRegister(
+      registerData.username.value,
+      registerData.password.value,
+      registerData.firstName.value,
+      registerData.lastName.value
+    );
+
+    if (api.status == 200 && api.data.status) {
+      setRegisResult({openAlert:true});
+      setTimeout(()=>{
+        setLoading(false);
+        history.push("/login");
+      },2000);
+    }else{
+      setRegisResult({openAlert:true});
       setLoading(false);
-      setRegisResult(true);
-    
-    }, 500);
+    }
 
-    setTimeout(() => {
-      history.push('/login');
-    }, 1000);
-
-  }
+  };
 
   return (
     <section>
@@ -66,10 +82,12 @@ const Register = (props) => {
                               label={"ชื่อ"}
                               type={"text"}
                               name={"firstName"}
-                              dataForm={loginData}
-                              setDataForm={setLoginData}
-                              errorStatus={loginData.firstName.error.status}
-                              errorMessage={loginData.firstName.error.message}
+                              dataForm={registerData}
+                              setDataForm={setRegisterData}
+                              errorStatus={registerData.firstName.error.status}
+                              errorMessage={
+                                registerData.firstName.error.message
+                              }
                             ></Input>
                           </div>
                           <div className="field">
@@ -77,56 +95,62 @@ const Register = (props) => {
                               label={"นามสกุล"}
                               type={"text"}
                               name={"lastName"}
-                              dataForm={loginData}
-                              setDataForm={setLoginData}
-                              errorStatus={loginData.lastName.error.status}
-                              errorMessage={loginData.lastName.error.message}
+                              dataForm={registerData}
+                              setDataForm={setRegisterData}
+                              errorStatus={registerData.lastName.error.status}
+                              errorMessage={registerData.lastName.error.message}
                             ></Input>
                           </div>
                         </div>
                       </div>
                       <div className="field ">
-                      <Input
+                        <Input
                           label={"อีเมล"}
                           type={"text"}
                           name={"username"}
-                          dataForm={loginData}
-                          setDataForm={setLoginData}
-                          errorStatus={loginData.username.error.status}
-                          errorMessage={loginData.username.error.message}
+                          dataForm={registerData}
+                          setDataForm={setRegisterData}
+                          errorStatus={registerData.username.error.status}
+                          errorMessage={registerData.username.error.message}
                         ></Input>
                       </div>
                       <div className="field ">
-                      <Input
+                        <Input
                           label={"รหัสผ่าน"}
                           type={"password"}
                           name={"password"}
-                          dataForm={loginData}
-                          setDataForm={setLoginData}
-                          errorStatus={loginData.password.error.status}
-                          errorMessage={loginData.password.error.message}
+                          dataForm={registerData}
+                          setDataForm={setRegisterData}
+                          errorStatus={registerData.password.error.status}
+                          errorMessage={registerData.password.error.message}
                         ></Input>
                       </div>
                       <div className="mt-5">
-                        {!loading  && (<button
-                          className="button is-block is-fullwidth is-warning is-rounded kanit-font"
-                          type="submit"
-                          onClick={submitRegister}
-                        >
-                          สมัครสมาชิก  
+                        {!loading && (
+                          <button
+                            className="button is-block is-fullwidth is-warning is-rounded kanit-font"
+                            type="submit"
+                            onClick={submitRegister}
+                          >
+                            สมัครสมาชิก
+                          </button>
+                        )}
 
-                        </button>)}
-
-                        {loading && (<button
-                          className="button is-block is-fullwidth is-warning is-rounded kanit-font"
-                          type="submit"
-                          disabled
-                          style={{opacity:"0.8"}}
-                        >
-                         <FontAwesomeIcon icon={faSpinner}  className="pr-2" size="lg"   />
-                          กำลังสมัคร...
-                        </button>)}
-                        
+                        {loading && (
+                          <button
+                            className="button is-block is-fullwidth is-warning is-rounded kanit-font"
+                            type="submit"
+                            disabled
+                            style={{ opacity: "0.8" }}
+                          >
+                            <FontAwesomeIcon
+                              icon={faSpinner}
+                              className="pr-2"
+                              size="lg"
+                            />
+                            กำลังสมัคร...
+                          </button>
+                        )}
                       </div>
                       <hr className="login-hr"></hr>
                       <SocialAuthBtn
@@ -150,7 +174,11 @@ const Register = (props) => {
           </div>
         </div>
       </div>
-       {regisResult && (< Alert type='error' message='เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้งค่ะ' ></Alert>)}  
+      {regisResult.openAlert &&
+        (
+          <Alert type="success"  message="สมัครสมาชิกสำเร็จ"></Alert>
+        )
+        }
     </section>
   );
 };

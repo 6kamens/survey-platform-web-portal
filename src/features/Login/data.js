@@ -1,6 +1,6 @@
 import {checkIsEmail , checkValidate} from "../../common/components/Input";
 
-export const loginRule = {
+export const loginInitial = {
     username:{
       name:'username',
       value:'',
@@ -30,7 +30,7 @@ export const loginRule = {
     }
 };
 
-export const registerRule ={
+export const registerInitial ={
     username:{
       name:'username',
       value:'',

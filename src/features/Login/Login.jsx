@@ -1,37 +1,48 @@
-import React , {useState , useEffect} from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SocialAuthBtn from "./SocialAuthBtn";
 import Input from "../../common/components/Input";
-import {loginRule,validateForm} from './loginFormData';
+import { loginInitial, validateForm } from "./data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-
-const SocialBtnSpan = styled.span`
-  font-size: 1rem;
-`;
+import { authUserPasswordLogin } from "./service";
+import Alert from "../../common/components/AppAlert";
+import { useHistory } from "react-router-dom";
 
 const Login = (props) => {
+  const [loading, setLoading] = useState(false);
+  const [loginData, setLoginData] = useState(loginInitial);
+  const [loginResult, setLoginResult] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
+  const history = useHistory();
 
-  const [loading,setLoading] = useState(false);
-  const [loginData,setLoginData] = useState(loginRule); 
-
-  
-  const submitLogin =(event)=>{
-    
+  const submitLogin = async (event) => {
     event.preventDefault();
 
-    
-    if(!validateForm([loginData.username,loginData.password],loginData,setLoginData)) return;
+    if (
+      !validateForm(
+        [loginData.username, loginData.password],
+        loginData,
+        setLoginData
+      )
+    )
+      return;
     setLoading(true);
 
-    //Faking API call here
-    setTimeout(() => {
+    const login = await authUserPasswordLogin(
+      loginData.username.value,
+      loginData.password.value
+    );
 
+    if (login.status == 200 && login.data.status) {
+      history.push("/dashboard");
+    } else {
+      loginData.password.value = '';
+      setLoginData({...loginData});
+      setOpenAlert(true);
       setLoading(false);
-    }, 500);
-
-  }
+    }
+  };
 
   return (
     <section>
@@ -70,25 +81,37 @@ const Login = (props) => {
                           errorMessage={loginData.password.error.message}
                         ></Input>
                       </div>
+                      {openAlert && (
+                        <p className="subtitle is-6 has-text-danger has-text-centered mb-1 ml-4 is-italic">
+                          {"* อีเมล หรือ รหัสผ่านไม่ถูกต้อง"}
+                        </p>
+                      )}
                       <div className="mt-5">
-                      {!loading  && (<button
-                          className="button is-block is-fullwidth is-warning is-rounded kanit-font"
-                          type="submit"
-                          onClick={submitLogin}
-                        >
-                          เข้าสู่ระบบ  
+                        {!loading && (
+                          <button
+                            className="button is-block is-fullwidth is-warning is-rounded kanit-font"
+                            type="submit"
+                            onClick={submitLogin}
+                          >
+                            เข้าสู่ระบบ
+                          </button>
+                        )}
 
-                        </button>)}
-
-                        {loading && (<button
-                          className="button is-block is-fullwidth is-warning is-rounded kanit-font"
-                          type="submit"
-                          disabled
-                          style={{opacity:"0.8"}}
-                        >
-                         <FontAwesomeIcon icon={faSpinner}  className="pr-2" size="lg"   />
-                          กำลังเข้าสู่ระบบ...
-                        </button>)}
+                        {loading && (
+                          <button
+                            className="button is-block is-fullwidth is-warning is-rounded kanit-font"
+                            type="submit"
+                            disabled
+                            style={{ opacity: "0.8" }}
+                          >
+                            <FontAwesomeIcon
+                              icon={faSpinner}
+                              className="pr-2"
+                              size="lg"
+                            />
+                            กำลังเข้าสู่ระบบ...
+                          </button>
+                        )}
                       </div>
                       <hr className="login-hr"></hr>
                       <SocialAuthBtn

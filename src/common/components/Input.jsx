@@ -1,6 +1,8 @@
 
 const Input = (props) => {
 
+
+
   const onChangeInput = (e) => {
     const fieldName = props.name;
     const fieldValue = e.target.value;
@@ -24,11 +26,12 @@ const Input = (props) => {
   return (
     <div className="control">
       <p className="subtitle is-6 mb-1 ml-4">{props.label}</p>
-      <input
-        className="input  is-rounded kanit-font"
+      <input className="input  is-rounded kanit-font"
         type={props.type}
         onChange={onChangeInput}
-      />
+        value={props.dataForm[props.name].value}
+        >
+      </input>
       {props.errorStatus && (
         <p className="subtitle is-6 has-text-danger mb-1 ml-4 is-italic">
           * {props.errorMessage}
