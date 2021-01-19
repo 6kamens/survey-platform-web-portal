@@ -46,7 +46,7 @@ export default function CustomizedSnackbars(props) {
       return;
     }
 
-    props.setOpen(false);
+    // props.setOpen(false);
     setOpen(false);
   };
 
@@ -55,7 +55,7 @@ export default function CustomizedSnackbars(props) {
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={open}
-        autoHideDuration={3000}
+        autoHideDuration={2000}
         onClose={handleClose}
       >
         <Alert

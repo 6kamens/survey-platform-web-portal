@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 const Icon = styled.div`
   &:hover {
     opacity: 0.8;

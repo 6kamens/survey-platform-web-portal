@@ -2,18 +2,45 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SocialAuthBtn from "./SocialAuthBtn";
 import Input from "../../common/components/Input";
-import { loginInitial, validateForm } from "./data";
+import { validateForm } from "./data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { authUserPasswordLogin } from "./service";
-import Alert from "../../common/components/AppAlert";
+import { authUserPasswordLogin , authUserToken } from "./service";
 import { useHistory } from "react-router-dom";
 
 const Login = (props) => {
   const [loading, setLoading] = useState(false);
-  const [loginData, setLoginData] = useState(loginInitial);
+  const [loginData, setLoginData] = useState({
+    username: {
+      name: "username",
+      value: "",
+      validator: {
+        minLength: 0,
+        maxLength: 100,
+        required: true,
+        // isEmail:true
+      },
+      error: {
+        status: false,
+        message: "",
+      },
+    },
+    password: {
+      name: "password",
+      value: "",
+      validator: {
+        minLength: 0,
+        maxLength: 100,
+        required: true,
+      },
+      error: {
+        status: false,
+        message: "",
+      },
+    },
+  });
   const [loginResult, setLoginResult] = useState(false);
-  const [openAlert, setOpenAlert] = useState(false);
+  const [openError, setOpenError] = useState({ errorMessage : ''  ,isOpen:false});
   const history = useHistory();
 
   const submitLogin = async (event) => {
@@ -34,12 +61,17 @@ const Login = (props) => {
       loginData.password.value
     );
 
-    if (login.status == 200 && login.data.status) {
-      history.push("/dashboard");
+    if (login.status == 200 || login.data.status) {
+
+      const authenUser = await authUserToken(login.data.data.accessToken);
+      console.log(authenUser.data);
+      history.push("/dashboard?code="+authenUser.data.data.username);
+
     } else {
-      loginData.password.value = '';
-      setLoginData({...loginData});
-      setOpenAlert(true);
+      
+      loginData.password.value = "";
+      setLoginData({ ...loginData });
+      setOpenError({ errorMessage : '* อีเมล หรือ รหัสผ่านไม่ถูกต้อง' ,isOpen:true});
       setLoading(false);
     }
   };
@@ -81,9 +113,9 @@ const Login = (props) => {
                           errorMessage={loginData.password.error.message}
                         ></Input>
                       </div>
-                      {openAlert && (
+                      {openError.isOpen && (
                         <p className="subtitle is-6 has-text-danger has-text-centered mb-1 ml-4 is-italic">
-                          {"* อีเมล หรือ รหัสผ่านไม่ถูกต้อง"}
+                          {openError.errorMessage}
                         </p>
                       )}
                       <div className="mt-5">

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { registerInitial, validateForm } from "./data";
+import { validateForm } from "./data";
 import SocialAuthBtn from "./SocialAuthBtn";
-import Input, { checkIsEmail } from "../../common/components/Input";
+import Input from "../../common/components/Input";
 import Alert from "../../common/components/AppAlert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +11,62 @@ import { authRegister } from "./service";
 
 const Register = (props) => {
   const [loading, setLoading] = useState(false);
-  const [registerData, setRegisterData] = useState(registerInitial);
+  const [registerData, setRegisterData] = useState({
+    username: {
+      name: "username",
+      value: "",
+      validator: {
+        minLength: 0,
+        maxLength: 100,
+        required: true,
+        isEmail: true,
+      },
+      error: {
+        status: false,
+        message: "",
+      },
+    },
+    password: {
+      name: "password",
+      value: "",
+      validator: {
+        minLength: 6,
+        maxLength: 100,
+        required: true,
+      },
+      error: {
+        status: false,
+        message: "",
+      },
+    },
+    firstName: {
+      name: "firstName",
+      value: "",
+      validator: {
+        minLength: 0,
+        maxLength: 100,
+        required: true,
+      },
+      error: {
+        status: false,
+        message: "",
+      },
+    },
+    lastName: {
+      name: "lastName",
+      value: "",
+      validator: {
+        minLength: 0,
+        maxLength: 100,
+        required: true,
+      },
+      error: {
+        status: false,
+        message: "",
+      },
+    },
+  });
+  const [openError, setOpenError] = useState({ errorMessage : ''  ,isOpen:false});
   const [regisResult, setRegisResult] = useState({
     result: false,
     openAlert: false,
@@ -40,24 +95,25 @@ const Register = (props) => {
     setLoading(true);
 
     //call register api
-    const api = await authRegister(
+    const apiRegister = await authRegister(
       registerData.username.value,
       registerData.password.value,
       registerData.firstName.value,
       registerData.lastName.value
     );
 
-    if (api.status == 200 && api.data.status) {
-      setRegisResult({openAlert:true});
-      setTimeout(()=>{
+    if (apiRegister.status == 200 || apiRegister.data.status) {
+      setRegisResult({ openAlert: true });
+      setTimeout(() => {
         setLoading(false);
         history.push("/login");
-      },2000);
-    }else{
-      setRegisResult({openAlert:true});
+      }, 1500);
+    } else {
+      registerData.password.value = '';
+      setRegisterData({...registerData});
+      setOpenError({ errorMessage : '* อีเมลนี้มีผู้ใช้เเล้ว กรุณาเปลี่ยนใหม่' ,isOpen:true});
       setLoading(false);
     }
-
   };
 
   return (
@@ -125,6 +181,11 @@ const Register = (props) => {
                           errorMessage={registerData.password.error.message}
                         ></Input>
                       </div>
+                      {openError.isOpen && (
+                        <p className="subtitle is-6 has-text-danger has-text-centered mb-1 ml-4 is-italic">
+                          {openError.errorMessage}
+                        </p>
+                      )}
                       <div className="mt-5">
                         {!loading && (
                           <button
@@ -174,11 +235,9 @@ const Register = (props) => {
           </div>
         </div>
       </div>
-      {regisResult.openAlert &&
-        (
-          <Alert type="success"  message="สมัครสมาชิกสำเร็จ"></Alert>
-        )
-        }
+      {regisResult.openAlert && (
+        <Alert type="success" message="สมัครสมาชิกสำเร็จ"></Alert>
+      )}
     </section>
   );
 };
