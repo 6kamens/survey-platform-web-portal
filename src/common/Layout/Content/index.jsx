@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import routes from "../routes";
 const loading = <h1></h1>;
 
-const ContentSection = (props) => {
+function ContentSection(props){
   return (
     <div className="hero bg-style is-fullheight">
       <Suspense fallback={loading}>

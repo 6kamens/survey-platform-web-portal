@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import {
   FacebookLoginButton,
   GoogleLoginButton,
@@ -9,8 +8,8 @@ import {
 const SocialBtnSpan = styled.span`
   font-size: 1rem;
 `;
+function SocialAuthBtn(props){
 
-const SocialAuthBtn = (props) => {
   return (
     <div>
       {props.channel == "google" && (

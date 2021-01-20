@@ -1,13 +1,10 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import DescriptionIcon from "@material-ui/icons/Description";
-import mainImage from "../../common/img/main.png";
-import mainImage2 from "../../common/img/desktop-hero-illustration.png";
 import MobileScreenShareIcon from "@material-ui/icons/MobileScreenShare";
 import FindInPageIcon from "@material-ui/icons/FindInPage";
 
@@ -25,7 +22,7 @@ const Main = styled.div`
   background-color: #f9f5f1;
 `;
 
-const TabPanel = (props) => {
+function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
     <div
@@ -42,25 +39,22 @@ const TabPanel = (props) => {
       )}
     </div>
   );
-};
+}
 
-const ExampleVideo = (props) => {
-
+function ExampleVideo(props) {
   const [value, setValue] = useState(0);
 
-
-  useEffect(()=>{
-   let v = setInterval(()=>{
-      if(value == 2){
+  useEffect(() => {
+    let v = setInterval(() => {
+      if (value == 2) {
         setValue(0);
-      }else{
-        setValue(value+1);
+      } else {
+        setValue(value + 1);
       }
-    },5000);
+    }, 5000);
 
     return () => clearInterval(v);
-
-  },[value]);
+  }, [value]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -130,8 +124,8 @@ const ExampleVideo = (props) => {
             {tabContent.map((content) => (
               <TabPanel value={value} index={content.index}>
                 <Box display="flex" justifyContent="center">
-                            <Image src={content.srcImg}></Image>
-                        </Box>
+                  <Image src={content.srcImg}></Image>
+                </Box>
               </TabPanel>
             ))}
           </div>
@@ -140,6 +134,6 @@ const ExampleVideo = (props) => {
       </Main>
     </div>
   );
-};
+}
 
 export default ExampleVideo;

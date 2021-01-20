@@ -1,17 +1,17 @@
 import '../scss/layout.scss';
-import NavBar from "./NavBar/NavBar";
-import ContentSection from "./Content/Content";
-import FooterSection from "./Footer/Footer";
+import NavBar from "./NavBar";
+import ContentSection from "./Content";
+import FooterSection from "./Footer";
 
 
-const LayoutPage = (props) => {
+function LayoutPage(props){
   return (
-    <div>
+    <>
         <NavBar></NavBar>
         <br></br>
         <ContentSection ></ContentSection>
         <FooterSection></FooterSection>
-    </div>
+    </>
 
   );
 };

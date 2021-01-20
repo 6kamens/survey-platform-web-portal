@@ -1,10 +1,8 @@
 import React from "react";
 import mainImage from "../../common/img/main.png";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
 import Typing from "react-typing-animation";
 
-const MainTop = (props) => {
+function MainTop(props){
   return (
     <section className="hero-body ">
       <div className="container">

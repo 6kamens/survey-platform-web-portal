@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import SocialAuthBtn from "./SocialAuthBtn";
+import SocialAuthBtn from "../../common/components/SocialBtn";
 import Input from "../../common/components/Input";
-import { validateForm } from "./data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { authUserPasswordLogin , authUserToken } from "./service";
+import { authUserPasswordLogin, authUserToken, validateForm } from "./service";
 import { useHistory } from "react-router-dom";
 
-const Login = (props) => {
+function Login(props) {
   const [loading, setLoading] = useState(false);
   const [loginData, setLoginData] = useState({
     username: {
@@ -40,7 +39,10 @@ const Login = (props) => {
     },
   });
   const [loginResult, setLoginResult] = useState(false);
-  const [openError, setOpenError] = useState({ errorMessage : ''  ,isOpen:false});
+  const [openError, setOpenError] = useState({
+    errorMessage: "",
+    isOpen: false,
+  });
   const history = useHistory();
 
   const submitLogin = async (event) => {
@@ -62,16 +64,16 @@ const Login = (props) => {
     );
 
     if (login.status == 200 || login.data.status) {
-
       const authenUser = await authUserToken(login.data.data.accessToken);
       console.log(authenUser.data);
-      history.push("/dashboard?code="+authenUser.data.data.username);
-
+      history.push("/dashboard?code=" + authenUser.data.data.username);
     } else {
-      
       loginData.password.value = "";
       setLoginData({ ...loginData });
-      setOpenError({ errorMessage : '* อีเมล หรือ รหัสผ่านไม่ถูกต้อง' ,isOpen:true});
+      setOpenError({
+        errorMessage: "* อีเมล หรือ รหัสผ่านไม่ถูกต้อง",
+        isOpen: true,
+      });
       setLoading(false);
     }
   };
@@ -170,6 +172,6 @@ const Login = (props) => {
       </div>
     </section>
   );
-};
+}
 
 export default Login;

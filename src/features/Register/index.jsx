@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { validateForm } from "./data";
-import SocialAuthBtn from "./SocialAuthBtn";
+import SocialAuthBtn from "../../common/components/SocialBtn";
 import Input from "../../common/components/Input";
-import Alert from "../../common/components/AppAlert";
+import Alert from "../../common/components/Alert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
-import { authRegister } from "./service";
+import { authRegister , validateForm } from "./service";
 
 const Register = (props) => {
   const [loading, setLoading] = useState(false);

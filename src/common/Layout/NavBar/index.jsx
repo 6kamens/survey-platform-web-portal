@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../../img/sm-logo-text-green.png";
 import styled from "styled-components";
 
-const NavBarTop = (props) => {
+function NavBarTop(props) {
   const [navbar, setNavbar] = useState(false);
 
   const navBarMenu = [
@@ -80,6 +80,6 @@ const NavBarTop = (props) => {
       </div>
     </Nav>
   );
-};
+}
 
 export default NavBarTop;

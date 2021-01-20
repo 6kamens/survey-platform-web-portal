@@ -1,10 +1,10 @@
 import React , {lazy}  from 'react';
 
-const Login = lazy(() => import('../../features/Login/Login'));
-const Register = lazy(()=> import('../../features/Login/Register'));
-const Main = lazy(()=> import('../../features/Main/Main'));
-const DashBoard = lazy(()=> import('../../features/DashBoard/DashBoard'));
-const NotFound = lazy(()=> import('../Layout/Error/NotFound'));
+const Login = lazy(() => import('../../features/Login'));
+const Register = lazy(()=> import('../../features/Register'));
+const Main = lazy(()=> import('../../features/Main'));
+const DashBoard = lazy(()=> import('../../features/DashBoard'));
+const NotFound = lazy(()=> import('./Error'));
 
 const routes = [
   { path: '/login', exact:'/login', name: 'Login', component: Login },

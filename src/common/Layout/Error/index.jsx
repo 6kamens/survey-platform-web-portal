@@ -1,4 +1,4 @@
-const NotFound = (props) => {
+function NotFound(props) {
   return (
     <section className="hero is-warning is-fullheight-with-navbar">
       <div className="hero-body">
@@ -8,6 +8,6 @@ const NotFound = (props) => {
       </div>
     </section>
   );
-};
+}
 
 export default NotFound;

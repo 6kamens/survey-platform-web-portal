@@ -1,4 +1,3 @@
-import mainImage from "../../common/img/main.png";
 import styled from "styled-components";
 import form from "../../common/icon/form.png";
 import customer from "../../common/icon/customer.png";
@@ -9,7 +8,7 @@ const Image = styled.img`
   height: 80px;
 `;
 
-const ProductSection = (props) => {
+function ProductSection(props) {
   const products = [
     {
       name: "สอบถามความพึงพอใจ",
@@ -59,6 +58,6 @@ const ProductSection = (props) => {
       </div>
     </section>
   );
-};
+}
 
 export default ProductSection;

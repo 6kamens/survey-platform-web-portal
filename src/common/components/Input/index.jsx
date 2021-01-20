@@ -1,8 +1,5 @@
-
-const Input = (props) => {
-
-
-
+function Input(props) {
+  
   const onChangeInput = (e) => {
     const fieldName = props.name;
     const fieldValue = e.target.value;
@@ -26,12 +23,12 @@ const Input = (props) => {
   return (
     <div className="control">
       <p className="subtitle is-6 mb-1 ml-4">{props.label}</p>
-      <input className="input  is-rounded kanit-font"
+      <input
+        className="input  is-rounded kanit-font"
         type={props.type}
         onChange={onChangeInput}
         value={props.dataForm[props.name].value}
-        >
-      </input>
+      ></input>
       {props.errorStatus && (
         <p className="subtitle is-6 has-text-danger mb-1 ml-4 is-italic">
           * {props.errorMessage}
@@ -41,15 +38,14 @@ const Input = (props) => {
   );
 };
 
-const checkIsEmail= (email)=>{
+const checkIsEmail = (email) => {
   let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if ( re.test(email) ) {
+  if (re.test(email)) {
     return true;
-  }
-  else {  
+  } else {
     return false;
   }
-}
+};
 
 const checkValidate = (inputField, rules) => {
   let isValid = true;
@@ -65,14 +61,13 @@ const checkValidate = (inputField, rules) => {
   } else if (rules.maxLength && inputFieldTrim.length > rules.maxLength) {
     isValid = false;
     errorMessage = `กรุณากรอกไม่เกิน ${rules.maxLength} ตัวอักษร`;
-  } else if(rules.isEmail && !checkIsEmail(inputField)){
-      isValid = false;
-      errorMessage = `กรุณากรอกอีเมลที่ถูกต้อง`;
+  } else if (rules.isEmail && !checkIsEmail(inputField)) {
+    isValid = false;
+    errorMessage = `กรุณากรอกอีเมลที่ถูกต้อง`;
   }
 
   return { isValid, errorMessage };
 };
 
-
-export {checkIsEmail , checkValidate};
+export { checkIsEmail, checkValidate };
 export default Input;

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import styled from "styled-components";
+
 const Icon = styled.div`
   &:hover {
     opacity: 0.8;
@@ -10,7 +11,7 @@ const Icon = styled.div`
   }
 `;
 
-const ContactUs = (props) => {
+function ContactUs(props){
   return (
     <section className="hero  is-primary is-bold">
       <div className="hero-body">
