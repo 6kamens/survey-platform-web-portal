@@ -9,7 +9,7 @@ import MobileScreenShareIcon from "@material-ui/icons/MobileScreenShare";
 import FindInPageIcon from "@material-ui/icons/FindInPage";
 
 const Image = styled.img`
-  width: 70%;
+  width: 50%;
   height: 450px;
 
   @media (max-width: 400px) {
@@ -44,17 +44,17 @@ function TabPanel(props) {
 function ExampleVideo(props) {
   const [value, setValue] = useState(0);
 
-  useEffect(() => {
-    let v = setInterval(() => {
-      if (value == 2) {
-        setValue(0);
-      } else {
-        setValue(value + 1);
-      }
-    }, 5000);
+  // useEffect(() => {
+  //   let v = setInterval(() => {
+  //     if (value == 2) {
+  //       setValue(0);
+  //     } else {
+  //       setValue(value + 1);
+  //     }
+  //   }, 5000);
 
-    return () => clearInterval(v);
-  }, [value]);
+  //   return () => clearInterval(v);
+  // }, [value]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -93,11 +93,8 @@ function ExampleVideo(props) {
   ];
 
   return (
-    <div className=" pt-0">
-      <Main className="container pt-5">
-        {/* <div className="container"> */}
-        <div className="columns is-centered has-text-centered">
-          <div className="column is-half ">
+      <Main className="pt-5 pb-5">
+        <div className="mb-2">
             <Tabs
               value={value}
               indicatorColor="primary"
@@ -117,10 +114,8 @@ function ExampleVideo(props) {
                 />
               ))}
             </Tabs>
-          </div>
         </div>
-        <div className="columns is-centered">
-          <div className="column is-10">
+        <div>
             {tabContent.map((content) => (
               <TabPanel value={value} index={content.index}>
                 <Box display="flex" justifyContent="center">
@@ -128,11 +123,9 @@ function ExampleVideo(props) {
                 </Box>
               </TabPanel>
             ))}
-          </div>
         </div>
-        {/* </div> */}
       </Main>
-    </div>
+
   );
 }
 

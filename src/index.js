@@ -6,10 +6,18 @@ import './common/scss/fonts.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter } from 'react-router-dom';
+import {Provider} from 'react-redux';
+import { store,persistor} from './store';
+import { PersistGate } from 'redux-persist/integration/react'
+
 
 ReactDOM.render(
   <BrowserRouter>
-      <App />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>     
   </BrowserRouter>
   ,
   document.getElementById('root')

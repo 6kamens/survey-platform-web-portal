@@ -25,22 +25,6 @@ const authUserPasswordLogin = async (username, password) => {
 
 }
 
-const authUserToken = async (accessToken) => {
-
-    try {
-        const response = await axios.post(
-            API_URL + '/oauth/session', {
-                accessToken: accessToken,
-            }
-        );
-        return response;
-
-    } catch (error) {
-        return error.response;
-
-    }
-
-}
 
 const validateForm = (formData,existingData,setDataForm)=>{
     
@@ -74,6 +58,17 @@ const validateForm = (formData,existingData,setDataForm)=>{
     
 }
 
+
+const authUserToken = async (accessToken) => {
+  try {
+    const response = await axios.post(API_URL + "/oauth/session", {
+      accessToken: accessToken,
+    });
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+};
 
 export {
     validateForm,

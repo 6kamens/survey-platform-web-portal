@@ -1,0 +1,8 @@
+const SET_USER_LOGIN = "SET_USER_ACTION";
+const SET_USER_LOGOUT = "SET_USER_LOGOUT";
+
+export default {
+    SET_USER_LOGIN,
+    SET_USER_LOGOUT
+}
+

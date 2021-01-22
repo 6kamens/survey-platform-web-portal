@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../img/sm-logo-text-green.png";
+import logo from "../../common/img/sm-logo-text-green.png";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import UserButton from "./UserButton";
 
 function NavBarTop(props) {
   const [navbar, setNavbar] = useState(false);
+  const { userInfo, isLogin } = useSelector((state) => state.login);
 
   const navBarMenu = [
     {
@@ -60,19 +63,22 @@ function NavBarTop(props) {
           <div className="navbar-end ">
             <div className="navbar-item">
               <div className="buttons  is-centered">
-                <button
-                  className="button is-warning"
-                  onClick={() => setNavbar(!navbar)}
-                >
-                  <strong>
-                    <Link
-                      to="/login"
-                      className="has-text-black is-block kanit-font"
-                    >
-                      เข้าสู่ระบบ
-                    </Link>
-                  </strong>
-                </button>
+                {isLogin && <UserButton name={userInfo.firstName}></UserButton>}
+                {!isLogin && (
+                  <button
+                    className="button is-warning"
+                    onClick={() => setNavbar(!navbar)}
+                  >
+                    <strong>
+                      <Link
+                        to="/login"
+                        className="has-text-black is-block kanit-font"
+                      >
+                        เข้าสู่ระบบ
+                      </Link>
+                    </strong>
+                  </button>
+                )}
               </div>
             </div>
           </div>

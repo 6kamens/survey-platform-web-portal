@@ -1,8 +1,11 @@
 import React from "react";
 import mainImage from "../../common/img/main.png";
 import Typing from "react-typing-animation";
+import { useHistory } from "react-router-dom";
 
-function MainTop(props){
+function MainTop(props) {
+  const history = useHistory();
+
   return (
     <section className="hero-body ">
       <div className="container">
@@ -21,13 +24,15 @@ function MainTop(props){
               </span>
             </Typing>
 
-            <h4 className="subtitle is-4 mt-2">เเบบสำรวจของคุณจะไม่จำเจอีกต่อไป</h4>
+            <h4 className="subtitle is-4 mt-2">
+              เเบบสำรวจของคุณจะไม่จำเจอีกต่อไป
+            </h4>
             <div className="buttons  is-centered">
               <button className="button is-medium is-hidden-mobile is-warning">
                 <strong>
                   <a
-                    href="/login"
                     className="has-text-black is-block kanit-font"
+                    onClick={() => history.push("/login")}
                   >
                     เริ่มต้นใช้งาน
                   </a>
@@ -49,6 +54,6 @@ function MainTop(props){
       </div>
     </section>
   );
-};
+}
 
 export default MainTop;

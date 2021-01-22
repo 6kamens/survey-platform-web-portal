@@ -1,6 +1,6 @@
 import './App.css';
 import {Switch, Route} from 'react-router-dom';
-import Layout from './common/layout';
+import Layout from './layout';
 import ScrollToTop from "../src/common/components/ScrollToTop";
 
 function App() {

@@ -1,4 +1,4 @@
-import '../scss/layout.scss';
+import '../common/scss/layout.scss';
 import NavBar from "./NavBar";
 import ContentSection from "./Content";
 import FooterSection from "./Footer";
