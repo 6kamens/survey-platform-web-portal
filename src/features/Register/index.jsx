@@ -216,13 +216,15 @@ const Register = (props) => {
                       <SocialAuthBtn
                         channel={"facebook"}
                         label={"สมัครสมาชิกผ่าน Facebook"}
+                        url={"http://localhost:4000/api/external-auth/facebook"}
+
                       ></SocialAuthBtn>
-                      <div className="mt-5 ">
+                      {/* <div className="mt-5 ">
                         <SocialAuthBtn
                           channel={"google"}
                           label={"สมัครสมาชิกผ่าน Google"}
                         ></SocialAuthBtn>
-                      </div>
+                      </div> */}
                     </form>
                   </div>
                   <h5 class="subtitle is-6 has-text-centered">

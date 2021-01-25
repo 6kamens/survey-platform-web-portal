@@ -1,4 +1,3 @@
-// import {createSlice} from '@reduxjs/toolkit';
 import actionType from "./actionType";
 
 const initialState = {
@@ -22,23 +21,5 @@ const reducer = (state = initialState , action)=>{
         default : return state;
     }
 }
-
-
-
-// createSlice({
-//     name:'login',
-//     initialState,
-//     reducers:{
-//         setUserInfo : (state,action)=>{
-//             state.isLogin = true;
-//             state.userInfo = action.payload;
-//         }
-//     }
-// });
-
-
-// export const {setUserInfo} = loginSlice.actions;
-
-// export default loginSlice.reducer;
 
 export default reducer;

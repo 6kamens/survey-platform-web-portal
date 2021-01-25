@@ -2,10 +2,9 @@ import { UnfoldLessTwoTone } from "@material-ui/icons";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import authenProvider from "../../authentication";
+import actionType from "../../authentication/actionType";
 import { useDispatch } from "react-redux";
-import { removeAccessToken } from "../../storage/accessToken";
-import actionType from "../../features/Login/actionType";
-
 const Button = styled.button`
   width: 8rem;
 `;
@@ -13,17 +12,13 @@ const Button = styled.button`
 function UserButton(props) {
   const [openMenu, setOpenMenu] = useState(false);
   const dispatch = useDispatch();
-  
-  // useEffect(()=>{
-  //    document.addEventListener("mousedown", ()=>setOpenMenu(false));
-
-  //    return ()=>  document.removeEventListener("mousedown", ()=>setOpenMenu(false));
-  // },[openMenu]);
 
   const signOut =()=>{
-    console.log('out');
-    removeAccessToken();
-    dispatch({type:actionType.SET_USER_LOGOUT});
+
+     authenProvider.logout();
+     dispatch({
+      type: actionType.SET_USER_LOGOUT
+  });
   }
 
   return (

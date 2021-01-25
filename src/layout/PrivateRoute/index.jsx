@@ -1,11 +1,28 @@
+import React, { useEffect } from "react";
 import routes from "../routes";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
+import authenProvider from "../../authentication";
+import actionType from "../../authentication/actionType";
 
 function PrivateRoute(props) {
+  const dispatch = useDispatch();
   let routeList = routes.guest;
-  let {isLogin,userInfo} = useSelector(state => state.login);
-  if(isLogin) routeList = routes.member ;
+  let isAuthen = authenProvider.isLogin();
+  let { isLogin, userInfo } = useSelector((state) => state.login);
+  if (isLogin) routeList = routes.member;
+
+  useEffect(() => {
+    if (!isAuthen && isLogin) {
+      dispatch({
+        type: actionType.SET_USER_LOGOUT,
+      });
+      authenProvider.logout();
+    }else if(isAuthen && !isLogin){
+      authenProvider.logout();
+    }
+
+  }, [isLogin]);
 
   return (
     <Switch>
@@ -22,7 +39,7 @@ function PrivateRoute(props) {
           )
         );
       })}
-      <Redirect to={routeList.redirect.path}  ></Redirect>
+      <Redirect to={routeList.redirect.path}></Redirect>
     </Switch>
   );
 }

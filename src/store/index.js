@@ -1,7 +1,6 @@
-import { configureStore} from '@reduxjs/toolkit';
 import { composeWithDevTools } from "redux-devtools-extension";
 import {createStore , combineReducers } from "redux";
-import loginReducer from "../features/Login/reducer";
+import loginReducer from "../authentication/reducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -25,11 +24,3 @@ export {
     persistor
 }
   
-  
-// const store = configureStore({
-//     reducer:{
-//         login: loginSlice
-//     }
-// },composeWithDevTools());
-
-// export default store;

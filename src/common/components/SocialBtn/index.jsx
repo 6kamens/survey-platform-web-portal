@@ -4,14 +4,22 @@ import {
   FacebookLoginButton,
   GoogleLoginButton,
 } from "react-social-login-buttons";
+import axios from "axios";
 
-const SocialBtnSpan = styled.span`
+const SocialBtnSpan = styled.a`
   font-size: 1rem;
+  display: block;
+  height: 100%;
+  width: 100%;
+  color:white;
+  &:hover{
+    color: white !important;
+  }
 `;
-function SocialAuthBtn(props){
 
+function SocialAuthBtn(props) {
   return (
-    <div>
+    <>
       {props.channel == "google" && (
         <GoogleLoginButton
           align={"center"}
@@ -22,16 +30,12 @@ function SocialAuthBtn(props){
         </GoogleLoginButton>
       )}
       {props.channel == "facebook" && (
-        <FacebookLoginButton
-          align={"center"}
-          onClick={() => alert("Hello")}
-          size={40}
-        >
-          <SocialBtnSpan className="kanit-font">{props.label}</SocialBtnSpan>
+        <FacebookLoginButton  align={"center"} size={40}>
+          <SocialBtnSpan href={props.url} className="kanit-font">{props.label}</SocialBtnSpan>
         </FacebookLoginButton>
       )}
-    </div>
+    </>
   );
-};
+}
 
 export default SocialAuthBtn;
